@@ -1,25 +1,36 @@
 import Head from "next/head";
 import React from "react";
+import { Card, Button } from "react-bootstrap";
 
 const index = (props) => {
-
   const allProducts = props.products.products;
-  console.log(allProducts);
   return (
-    <div>
+    <>
       <Head>
         <title>Getting Started with Next.js</title>
       </Head>
-      <h1>Product</h1>
-      {allProducts?.map(({name,price}, i) => (
-        <div  key={i}>
-          <h1>{name}</h1>
-          <p>{price}</p>
-          <button className=" btn btn-success px-3 py-2">Details </button>
-        </div>
+
+      <div className="container ">
+      <h1>Getting Started with E-commerce Website</h1>
+        <div className="row">
+        {allProducts?.map(({ name, price,id,image_path}) => (
+        <Card style={{ width: "18rem" }} key={id} className='col-md-3 col-sm-4 mx-3 my-2'>
+          <Card.Img variant="top" src={image_path} />
+          <Card.Body>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>
+              Price: {price}
+            </Card.Text>
+            <div className="d-flex justify-content-center align-items-center gap-2">
+            <Button variant="success">Delete</Button>
+            <Button variant="danger">Update</Button>
+            </div>
+          </Card.Body>
+        </Card>
       ))}
-     
-    </div>
+        </div>
+      </div>
+    </>
   );
 };
 
@@ -29,8 +40,7 @@ export const getStaticProps = async (context) => {
   const options = {
     method: "POST",
     headers: {
-      "x-hasura-admin-secret":
-        "pZg65ZTrvsBXkLUz9QoZDfiswwm74eZgFayLj5g3mk73Y9S1T6zQ84j1nliJ4GNX",
+      "x-hasura-admin-secret":process.env.NEXT_HASURA_ADMIN_SECRET,
     },
     body: JSON.stringify({
       query: `
@@ -38,15 +48,15 @@ export const getStaticProps = async (context) => {
         products{
           id
           name
+          image_path
           price
         }
-      }
+      } 
       `,
       operationName: "fetchProducts",
     }),
   };
-  const fetchResponse = await fetch(
-    "https://nextjs-hasura-12.hasura.app/v1/graphql",
+  const fetchResponse = await fetch(process.env.NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT,
     options
   );
   const responseJson = await fetchResponse.json();
