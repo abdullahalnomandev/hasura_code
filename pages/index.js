@@ -12,9 +12,10 @@ const index = (props) => {
       </Head>
       <h1>Product</h1>
       {allProducts?.map(({name,price}, i) => (
-        <div key={i}>
+        <div  key={i}>
           <h1>{name}</h1>
           <p>{price}</p>
+          <button className=" btn btn-success px-3 py-2">Details </button>
         </div>
       ))}
      
