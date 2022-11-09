@@ -42,7 +42,7 @@ const Index = (props) => {
     console.log("add", products);
   };
 
-  const allProducts = props.products;
+  const allProducts = props?.products;
   console.log(process.env.NEXT_HASURA_ADMIN_SECRET);
 
   // DELETE
@@ -159,7 +159,7 @@ export const getStaticProps = async (context) => {
     data: graphqlQuery,
   });
 
-  const products = response.data.data.products;
+  const products = response.data.data.products || [] ;
   console.log("productss", products);
 
   return {
