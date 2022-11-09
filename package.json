@@ -15,9 +15,14 @@
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.2",
     "next": "13.0.2",
+    "next-auth": "^4.16.4",
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.39.1"
+    "react-hook-form": "^7.39.1",
+    "sqlite": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.9"
   }
 }

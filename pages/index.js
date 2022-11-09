@@ -55,7 +55,7 @@ const Index = (props) => {
         "pZg65ZTrvsBXkLUz9QoZDfiswwm74eZgFayLj5g3mk73Y9S1T6zQ84j1nliJ4GNX",
     };
     const fetchProducts = {
-      query: ` mutation($id:Int!){
+      query: `mutation($id:Int!){
       delete_products_by_pk(id:$id){
         id
         name
